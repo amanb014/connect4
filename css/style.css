@@ -1,0 +1,69 @@
+body {
+	background: rgba(239,234,193,1);
+}
+
+h1 {
+	font-size: 6.4vw;
+	font-family: 'Courier New', fixed-width;
+	font-weight: 500;
+}
+
+h2 {
+	font-size: 3.5vw;
+	font-family: 'Courier New', fixed-width;
+	font-weight: 300;
+}
+
+.board-container {
+	/*background-color: #fff;*/
+	width: 80%;
+	max-width: 1000px;
+	height: 85%;
+	max-height: 1000px;
+	margin: 0px auto 0 auto;
+
+	/*FLEX PROPERTIES*/
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	flex-direction: row;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	/*align-items: stretch;*/
+}
+
+.column {
+	width: 12%;
+	height: 100%;
+	/*background-color: #e3e3e3;*/
+	margin: auto;
+	border-bottom: 1px #000 solid;
+	/*box-shadow: 0px 7px 5px grey;*/
+}
+
+.center {
+	margin: 0 auto;
+	text-align: center;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#headWrapper {
+	width: 100%;
+	height: 16vh;
+	/*background-color: #000;*/
+	overflow: auto;
+	position: relative;
+}
+
+#contentWrapper {
+	width: 100%;
+	height: 84vh;
+	bottom: 0;
+}
