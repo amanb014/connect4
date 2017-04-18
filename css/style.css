@@ -72,3 +72,12 @@ h2 {
 	height: 84vh;
 	bottom: 0;
 }
+
+.circle {
+	width: 100%;
+	height: auto;
+	background-color: #D74E4F;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
