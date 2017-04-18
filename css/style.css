@@ -44,6 +44,11 @@ h2 {
 	/*box-shadow: 0px 7px 5px grey;*/
 }
 
+.column:hover {
+	box-shadow: 0px 7px 5px grey;
+
+}
+
 .center {
 	margin: 0 auto;
 	text-align: center;
