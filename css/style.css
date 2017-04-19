@@ -3,13 +3,13 @@ body {
 }
 
 h1 {
-	font-size: 6.4vw;
+	font-size: 6vw;
 	font-family: 'Courier New', fixed-width;
 	font-weight: 500;
 }
 
 h2 {
-	font-size: 3.5vw;
+	font-size: 2.5vw;
 	font-family: 'Courier New', fixed-width;
 	font-weight: 300;
 }
@@ -86,6 +86,6 @@ h2 {
 	-moz-transition: margin 0.1s 0.1s ease-out;
 }
 
-.red {background-color: #D74E4F;}
-.black {background-color: #300C33;}
+.player-0 {background-color: #D74E4F;}
+.player-1 {background-color: #300C33;}
 .displayNone {display: none;}

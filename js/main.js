@@ -9,7 +9,7 @@ var boardContainer, columns; // columns is an array of them all
 //constants
 const maxPerCol = 6;
 const dom = 0, width = 1, height = 2, piecesIn = 3;
-const red = 1, black = 2;
+const p0 = 0, p1 = 1;
 
 //initializes all important variables defined above. 
 //The function is at the very bottom.
@@ -24,10 +24,13 @@ function selectColumn(col) {
 // ADDING A PIECE TO THE GIVEN COLUMN.
 function addPiece(col) {
 
-	if()
-
-	console.log('Adding piece to a column');
-	activePlayer = (activePlayer === 0) ? 1 : 0;
+	if(col['count'] < 6) {
+		console.log('Adding piece to a column');
+		col['count']++;
+		nextPlayer();
+	} else {
+		console.log('Column FULL.')
+	}
 }
 
 //Resets all scores, player names.
@@ -40,6 +43,17 @@ function resetGame() {
 //keeping the scores intact.
 function playAgain() {
 
+}
+
+function nextPlayer() {
+
+	let next = (activePlayer === p0) ? p1 : p0;
+
+	activePiece.classList.remove('player-' + activePlayer);
+	activePlayer = next;
+	activePiece.classList.add('player-' + next);
+
+	activePlayer = next;
 }
 
 function initVariables() {
@@ -67,11 +81,13 @@ function initVariables() {
 	// 2 = black
 	columnFilled = new Array();
 	for(let i = 0; i < 6; i++) {
-		columnFilled.push([0,0,0,0,0,0,0]);
+		columnFilled.push([false,false,false,false,false,false,false]);
 	}
 
+	activePlayer = p0;
+
 	activePiece = document.querySelector(".activePiece");
-	activePiece.classList.add('displayNone', 'red');
+	activePiece.classList.add('displayNone', 'player-'+activePlayer);
 	activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
 	activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
 
@@ -83,9 +99,6 @@ function initVariables() {
 		activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
 	});
 	containerSize = boardContainer.offsetWidth;
-
-	//MISC
-	activePlayer = 0;
 
 	//Two player objects in a new array
 	players = new Array();
