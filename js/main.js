@@ -1,7 +1,7 @@
 //For defining hpw big the elements are, based on the window size. 
 var circleSize, containerSize;
 
-var columnFilled, players, activePlayer, activePiece;
+var boardStatus, players, activePlayer, activePiece;
 
 //DOM objects
 var boardContainer, columns; // columns is an array of them all
@@ -9,22 +9,37 @@ var boardContainer, columns; // columns is an array of them all
 //constants
 const maxPerCol = 6;
 const dom = 0, width = 1, height = 2, piecesIn = 3;
-const red = 1, black = 2;
+const p0 = 0, p1 = 1;
 
 //initializes all important variables defined above. 
 //The function is at the very bottom.
 initVariables();
 
-function selectColumn(arg) {
+function selectColumn(col) {
 	console.log('Hovering over a column.. ');
 	activePiece.classList.remove('displayNone');
-	activePiece.style.margin = '0 0 0 ' + arg['DOM_Object'].offsetLeft + 'px';
+	activePiece.style.margin = '0 0 0 ' + col['DOM_Object'].offsetLeft + 'px';
 }
 
 // ADDING A PIECE TO THE GIVEN COLUMN.
-function addPiece(arg) {
-	console.log('Adding piece to a column');
-	activePlayer = (activePlayer === 0) ? 1 : 0;
+function addPiece(col) {
+
+	if(col['count'] < 6) {	
+		boardStatus[5 - col['count']][col['ind']] = activePlayer;
+		addPieceToUI(5 - col['count'], col['ind']);
+		col['count']++;
+		console.log(boardStatus);
+		nextPlayer();
+	} 
+	else {
+		console.log('Column FULL.')
+	}
+}
+
+function addPieceToUI(row, col) {
+	console.log('ADDING TO: ' + row + ' ' + col);
+	console.log(row + ' ' + col);
+
 }
 
 //Resets all scores, player names.
@@ -39,6 +54,17 @@ function playAgain() {
 
 }
 
+function nextPlayer() {
+
+	let next = (activePlayer === p0) ? p1 : p0;
+
+	activePiece.classList.remove('player-' + activePlayer);
+	activePlayer = next;
+	activePiece.classList.add('player-' + next);
+
+	activePlayer = next;
+}
+
 function initVariables() {
 
 	//Data of columns
@@ -48,7 +74,8 @@ function initVariables() {
 		columns.push({
 			DOM_Object: dom,
 			id: 		'column-' + i,
-			count: 		0
+			count: 		0,
+			ind: 		i
 		});
 		columns[i]['DOM_Object'].addEventListener('click', function() {
 			addPiece(columns[i]);
@@ -59,16 +86,18 @@ function initVariables() {
 	}
 
 	//Data for columns - 
-	// 0 = nothing in there
-	// 1 = red
-	// 2 = black
-	columnFilled = new Array();
+	// false = nothing in there
+	// 0 = red
+	// 1 = black
+	boardStatus = new Array();
 	for(let i = 0; i < 6; i++) {
-		columnFilled.push([0,0,0,0,0,0,0]);
+		boardStatus.push([false,false,false,false,false,false,false]);
 	}
 
+	activePlayer = p0;
+
 	activePiece = document.querySelector(".activePiece");
-	activePiece.classList.add('displayNone');
+	activePiece.classList.add('displayNone', 'player-'+activePlayer);
 	activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
 	activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
 
@@ -80,9 +109,6 @@ function initVariables() {
 		activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
 	});
 	containerSize = boardContainer.offsetWidth;
-
-	//MISC
-	activePlayer = 0;
 
 	//Two player objects in a new array
 	players = new Array();
