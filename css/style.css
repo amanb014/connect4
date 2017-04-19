@@ -14,12 +14,12 @@ h2 {
 	font-weight: 300;
 }
 
-.board-container {
+#board-container {
 	/*background-color: #fff;*/
 	width: 80%;
-	max-width: 1000px;
+	max-width: 800px;
 	height: 85%;
-	max-height: 1000px;
+	max-height: 800px;
 	margin: 0px auto 0 auto;
 
 	/*FLEX PROPERTIES*/
@@ -74,10 +74,18 @@ h2 {
 }
 
 .circle {
-	width: 100%;
-	height: auto;
+	width: 100px;
+	height: 100px;
 	background-color: #D74E4F;
 	-moz-border-radius: 50px;
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
+
+	-webkit-transition: margin 0.1s 0.1s ease-out;
+	transition: margin 0.1s 0.1s ease-out;
+	-o-transition: margin 0.1s 0.1s ease-out;
+	-moz-transition: margin 0.1s 0.1s ease-out;
 }
+
+.black {background-color: black;}
+.displayNone {display: none;}
