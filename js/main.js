@@ -1,7 +1,7 @@
 //For defining hpw big the elements are, based on the window size. 
 var circleSize, containerSize;
 
-var columnFilled, players, activePlayer, activePiece;
+var boardStatus, players, activePlayer, activePiece;
 
 //DOM objects
 var boardContainer, columns; // columns is an array of them all
@@ -24,13 +24,22 @@ function selectColumn(col) {
 // ADDING A PIECE TO THE GIVEN COLUMN.
 function addPiece(col) {
 
-	if(col['count'] < 6) {
-		console.log('Adding piece to a column');
+	if(col['count'] < 6) {	
+		boardStatus[5 - col['count']][col['ind']] = activePlayer;
+		addPieceToUI(5 - col['count'], col['ind']);
 		col['count']++;
+		console.log(boardStatus);
 		nextPlayer();
-	} else {
+	} 
+	else {
 		console.log('Column FULL.')
 	}
+}
+
+function addPieceToUI(row, col) {
+	console.log('ADDING TO: ' + row + ' ' + col);
+	console.log(row + ' ' + col);
+
 }
 
 //Resets all scores, player names.
@@ -65,7 +74,8 @@ function initVariables() {
 		columns.push({
 			DOM_Object: dom,
 			id: 		'column-' + i,
-			count: 		0
+			count: 		0,
+			ind: 		i
 		});
 		columns[i]['DOM_Object'].addEventListener('click', function() {
 			addPiece(columns[i]);
@@ -76,12 +86,12 @@ function initVariables() {
 	}
 
 	//Data for columns - 
-	// 0 = nothing in there
-	// 1 = red
-	// 2 = black
-	columnFilled = new Array();
+	// false = nothing in there
+	// 0 = red
+	// 1 = black
+	boardStatus = new Array();
 	for(let i = 0; i < 6; i++) {
-		columnFilled.push([false,false,false,false,false,false,false]);
+		boardStatus.push([false,false,false,false,false,false,false]);
 	}
 
 	activePlayer = p0;
