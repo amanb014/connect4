@@ -76,7 +76,6 @@ h2 {
 .circle {
 	width: 100px;
 	height: 100px;
-	background-color: #D74E4F;
 	-moz-border-radius: 50px;
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
@@ -87,5 +86,6 @@ h2 {
 	-moz-transition: margin 0.1s 0.1s ease-out;
 }
 
-.black {background-color: black;}
+.red {background-color: #D74E4F;}
+.black {background-color: #300C33;}
 .displayNone {display: none;}

@@ -15,14 +15,17 @@ const red = 1, black = 2;
 //The function is at the very bottom.
 initVariables();
 
-function selectColumn(arg) {
+function selectColumn(col) {
 	console.log('Hovering over a column.. ');
 	activePiece.classList.remove('displayNone');
-	activePiece.style.margin = '0 0 0 ' + arg['DOM_Object'].offsetLeft + 'px';
+	activePiece.style.margin = '0 0 0 ' + col['DOM_Object'].offsetLeft + 'px';
 }
 
 // ADDING A PIECE TO THE GIVEN COLUMN.
-function addPiece(arg) {
+function addPiece(col) {
+
+	if()
+
 	console.log('Adding piece to a column');
 	activePlayer = (activePlayer === 0) ? 1 : 0;
 }
@@ -68,7 +71,7 @@ function initVariables() {
 	}
 
 	activePiece = document.querySelector(".activePiece");
-	activePiece.classList.add('displayNone');
+	activePiece.classList.add('displayNone', 'red');
 	activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
 	activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
 
