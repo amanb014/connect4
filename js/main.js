@@ -37,8 +37,14 @@ function addPiece(col) {
 }
 
 function addPieceToUI(row, col) {
-	console.log('ADDING TO: ' + row + ' ' + col);
-	console.log(row + ' ' + col);
+
+	var piece = document.createElement('div');
+	piece.classList.add('placedPiece', 'player-' + activePlayer);
+	piece.id = row + '-' + col;
+	let width = columns[1]['DOM_Object'].offsetWidth;
+	piece.style.margin = (width * columns[col]['count'] + width) + '0 0 0';
+
+	columns[col]['DOM_Object'].appendChild(piece);
 
 }
 
@@ -98,8 +104,8 @@ function initVariables() {
 
 	activePiece = document.querySelector(".activePiece");
 	activePiece.classList.add('displayNone', 'player-'+activePlayer);
-	activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
-	activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
+		activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
+		activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
 
 	//DOM Variables
 	boardContainer = document.getElementById('board-container');
@@ -107,6 +113,14 @@ function initVariables() {
 		containerSize = boardContainer.offsetWidth;
 		activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
 		activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
+
+		// console.log(document.querySelectorAll('.placedPiece').offsetWidth);
+
+
+		// document.querySelectorAll('.placedPiece').style.width = (columns[1]['DOM_Object'].offsetHeight / 6) + 'px';
+		// document.querySelectorAll('.placedPiece').style.height = (columns[1]['DOM_Object'].offsetHeight / 6) + 'px';
+
+		console.log((columns[1]['DOM_Object'].offsetHeight / 6) + 'px');
 	});
 	containerSize = boardContainer.offsetWidth;
 
@@ -117,5 +131,10 @@ function initVariables() {
 				name: 'Player ' + (i+1),
 				score: 0
 			});
+	}
+
+	function resetPieceSizes() {
+
+
 	}
 }
