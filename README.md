@@ -17,3 +17,8 @@ Each player gets to enter their name for pseudo-points assigned to their name. C
 Thank you for reading, enjoy!
 
 Live demo can be found on <a target="_blank" href="http://amanbhimani.com/connect4/">amanbhimani.com</a>
+
+
+TO-DO LIST:
+1. Players can change names
+2. Keyboard controls (arrows, AD, Space, down)
