@@ -12,7 +12,8 @@ Controls of the Game:
 3. Players can use A and D to move through columns and space to drop on their physical keyboard.
 4. Players can enable on-screen left, right, and drop keys and press the buttons.
 
-
 Each player gets to enter their name for pseudo-points assigned to their name. Currently, no scores are stored anywhere to prove your victories.
 
 Thank you for reading, enjoy!
+
+Live demo can be found on <a target="_blank" href="http://amanbhimani.com/connect4/">amanbhimani.com</a>
