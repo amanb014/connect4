@@ -63,7 +63,7 @@ function selectColumn(col) {
 	console.log('Hovering over a column.. ');
 
 	if(flag) {
-		activePiece.classList.remove('displayNone');
+		// activePiece.classList.remove('displayNone');
 		flag = false;
 	}
 	activePiece.style.margin = '0 0 0 ' + col['DOM_Object'].offsetLeft + 'px';
