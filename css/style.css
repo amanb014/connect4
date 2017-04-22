@@ -45,6 +45,8 @@ h2 {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column-reverse;
+
+	background: rgba(0,0,0, 0.05);
 }
 
 .column:hover {
