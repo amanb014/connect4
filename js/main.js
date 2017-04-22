@@ -1,8 +1,8 @@
-
 var boardStatus, players, activePlayer, activePiece;
-
-//DOM objects
-var boardContainer, columns; // columns is an array of them all
+var columns;
+var gameStatus = 'playing';
+var scores = [];
+var resetGame;
 
 //constants
 const maxPerCol = 6;
@@ -11,6 +11,8 @@ const p0 = 0, p1 = 1;
 var flag = true;
 
 window.onload = function() {
+
+	//Get the columns data in JS object
 	columns = [];
 	for(let i = 0; i < 7; i++) {
 		let dom = document.getElementById('column-' + i)
@@ -21,26 +23,28 @@ window.onload = function() {
 			ind: 		i
 		});
 		columns[i]['DOM_Object'].addEventListener('click', function() {
-			addPiece(columns[i]);
+			if(gameStatus === 'playing') addPiece(columns[i]);
 		});
 		columns[i]['DOM_Object'].addEventListener('mouseover', function() {
 			selectColumn(columns[i]);
 		});;
 	}
 
-	//DOM Variables
-	boardContainer = document.getElementById('board-container');
+	//Active piece is the one that is shown for selection of columns
 	activePiece = document.querySelector('.activePiece');
+	scores[p0] = document.getElementById('p0-score');
+	scores[p1] = document.getElementById('p1-score');
+	resetGame = document.getElementById('new-game')
 
-	//Window Listeners
+
+	//Change piece size based on column widths
 	window.addEventListener('resize', function() {
-		containerSize = boardContainer.offsetWidth;
 		activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
 		activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
-
-		console.log((columns[1]['DOM_Object'].offsetHeight / 6) + 'px');
+		// console.log((columns[1]['DOM_Object'].offsetHeight / 6) + 'px');
 	});
 
+	//Add active piece styles and sizes
 	activePiece.classList.add('player-'+activePlayer);
 	activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
 	activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
@@ -55,12 +59,25 @@ window.onload = function() {
 			});
 	}
 
+	resetGame.addEventListener('click', function() {
+		if(gameStatus === 'won') {
+			playAgain();
+			resetBoardData();
+
+			header.textContent = 'Connect 4';
+			gameStatus = 'playing';
+			this.textContent = 'Reset';
+		}
+		
+	});
+
+	
 	resetBoardData();
 	playAgain();
 }
 
 function selectColumn(col) {
-	console.log('Hovering over a column.. ');
+	// console.log('Hovering over a column.. ');
 
 	if(flag) {
 		// activePiece.classList.remove('displayNone');
@@ -79,14 +96,27 @@ function addPiece(col) {
 		addPieceToUI(5 - col['count'], col['ind']);
 		col['count']++;
 		if(checkForWin()) {
-			console.log('PLAYER '+ activePlayer + ' WINS');
+			// console.log('PLAYER '+ activePlayer + ' WINS');
+			gameStatus = 'won';
+			header.textContent = players[activePlayer].name + ' WON!'
+			players[activePlayer].score++;
+			updateScoresOnUI();
+			resetGame.textContent = 'Play Again'
 		} else {
 			nextPlayer();
 		}
 	} 
 	else {
-		console.log('Column FULL.')
+		// console.log('Column FULL.')
 	}
+}
+
+
+function updateScoresOnUI() {
+	scores[p0].textContent = players[p0].score;
+	scores[p1].textContent = players[p1].score;
+	// console.log(scores);
+	// console.log(players);
 }
 
 function addPieceToUI(row, col) {
@@ -114,7 +144,9 @@ function playAgain() {
 		columns[i]['count'] = 0;
 		columns[i]['DOM_Object'].innerHTML = '';
 	}
+}
 
+function resetPlayers() {
 	for(let i = 0; i < 2; i++) {
 		players[i].score = 0;
 		players[i].pieces = 0;
@@ -150,7 +182,7 @@ function resetBoardData() {
 }
 
 function checkForWin() {
-	console.log(boardStatus);
+	// console.log(boardStatus);
 
 	//horizontal check
 	for(let i = 0; i < (boardStatus.length); i++) {
