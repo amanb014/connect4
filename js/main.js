@@ -60,10 +60,10 @@ window.onload = function() {
 	}
 
 	resetGame.addEventListener('click', function() {
-		if(gameStatus === 'won') {
-			playAgain();
-			resetBoardData();
+		playAgain();
+		resetBoardData();
 
+		if(gameStatus === 'won') {
 			header.textContent = 'Connect 4';
 			gameStatus = 'playing';
 			this.textContent = 'Reset';
