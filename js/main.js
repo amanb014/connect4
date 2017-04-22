@@ -1,8 +1,5 @@
-
 var boardStatus, players, activePlayer, activePiece;
-
-//DOM objects
-var boardContainer, columns; // columns is an array of them all
+var columns;
 
 //constants
 const maxPerCol = 6;
@@ -28,16 +25,11 @@ window.onload = function() {
 		});;
 	}
 
-	//DOM Variables
-	boardContainer = document.getElementById('board-container');
 	activePiece = document.querySelector('.activePiece');
 
-	//Window Listeners
 	window.addEventListener('resize', function() {
-		containerSize = boardContainer.offsetWidth;
 		activePiece.style.width = columns[1]['DOM_Object'].offsetWidth + 'px';
 		activePiece.style.height = columns[1]['DOM_Object'].offsetWidth + 'px';
-
 		console.log((columns[1]['DOM_Object'].offsetHeight / 6) + 'px');
 	});
 
