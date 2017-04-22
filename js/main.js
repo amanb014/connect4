@@ -72,13 +72,17 @@ function selectColumn(col) {
 // ADDING A PIECE TO THE GIVEN COLUMN.
 function addPiece(col) {
 
-	if(col['count'] < 6) {	
+	var win = false;
+
+	if(col['count'] < 6) {
 		boardStatus[5 - col['count']][col['ind']] = activePlayer;
 		addPieceToUI(5 - col['count'], col['ind']);
 		col['count']++;
-		players[activePlayer].pieces++;
-		// console.log(boardStatus);
-		nextPlayer();
+		if(checkForWin()) {
+			console.log('PLAYER '+ activePlayer + ' WINS');
+		} else {
+			nextPlayer();
+		}
 	} 
 	else {
 		console.log('Column FULL.')
@@ -143,4 +147,47 @@ function resetBoardData() {
 	for(let i = 0; i < 6; i++) {
 		boardStatus.push([false,false,false,false,false,false,false]);
 	}
+}
+
+function checkForWin() {
+	console.log(boardStatus);
+
+	//horizontal check
+	for(let i = 0; i < (boardStatus.length); i++) {
+		for(let j = 0; j < boardStatus[i].length - 3; j++) {				
+			if(boardStatus[i][j] === activePlayer && boardStatus[i][j+1] === activePlayer && boardStatus[i][j+2] === activePlayer && boardStatus[i][j+3] === activePlayer) {
+				return true;
+			}
+		}
+	}
+	
+	//vertical check
+	for(let i = 0; i < boardStatus.length - 3; i++) {
+		for(let j = 0; j < boardStatus[i].length; j++) {
+			if(boardStatus[i][j] === activePlayer && boardStatus[i+1][j] === activePlayer && boardStatus[i+2][j] === activePlayer && boardStatus[i+3][j] === activePlayer) {
+				return true;
+			}
+
+		}
+	}
+
+	//diagonal check
+	for (let i = 0; i < boardStatus.length-3; i++) {
+		for (let j = 0; j < boardStatus[i].length-3; j++) {
+			if(boardStatus[i][j] === activePlayer && boardStatus[i+1][j+1] === activePlayer && boardStatus[i+2][j+2] === activePlayer && boardStatus[i+3][j+3] === activePlayer) {
+				return true;
+			}
+		}
+	}
+
+	//IF NOTHING WORKS, return false.
+	return false;
+}
+
+function inArray(needle,haystack) {
+	var count=haystack.length;
+	for(var i=0;i<count;i++) {
+		if(haystack[i]===needle){return true;}
+	}
+	return false;
 }
