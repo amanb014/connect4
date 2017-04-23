@@ -1,8 +1,9 @@
 var boardStatus, players, activePlayer, activePiece;
-var columns;
+var columns, notify;
 var gameStatus = 'playing';
 var scores = [];
 var resetGame;
+var pNamesUI = [];
 
 //constants
 const maxPerCol = 6;
@@ -35,6 +36,10 @@ window.onload = function() {
 	scores[p0] = document.getElementById('p0-score');
 	scores[p1] = document.getElementById('p1-score');
 	resetGame = document.getElementById('new-game')
+	pNamesUI[0] = document.getElementById('p0-name');
+	pNamesUI[1] = document.getElementById('p1-name');
+	notify = document.getElementById('notify');
+
 
 
 	//Change piece size based on column widths
@@ -71,6 +76,16 @@ window.onload = function() {
 		
 	});
 
+	pNamesUI[0].addEventListener('change', function() {
+		updateName(pNamesUI[0].value, p0);
+	});
+
+	pNamesUI[1].addEventListener('change', function() {
+		updateName(pNamesUI[1].value, p1);
+	});
+	
+	
+
 	
 	resetBoardData();
 	playAgain();
@@ -78,11 +93,7 @@ window.onload = function() {
 
 function selectColumn(col) {
 	// console.log('Hovering over a column.. ');
-
-	if(flag) {
-		// activePiece.classList.remove('displayNone');
-		flag = false;
-	}
+	activePiece.classList.remove('displayNone');
 	activePiece.style.margin = '0 0 0 ' + col['DOM_Object'].offsetLeft + 'px';
 }
 
@@ -98,7 +109,7 @@ function addPiece(col) {
 		if(checkForWin()) {
 			// console.log('PLAYER '+ activePlayer + ' WINS');
 			gameStatus = 'won';
-			header.textContent = players[activePlayer].name + ' WON!'
+			notify.textContent = players[activePlayer].name + ' WON!'
 			players[activePlayer].score++;
 			updateScoresOnUI();
 			resetGame.textContent = 'Play Again'
@@ -137,6 +148,8 @@ function playAgain() {
 
 	//first player is the new active player
 	activePlayer = p0;
+	notify.textContent = '';
+
 
 	//reset the count of pieces in each column. 
 	//reset the UI inside each column
@@ -154,8 +167,9 @@ function resetPlayers() {
 }
 
 //Change the name of players
-function changeNames() {
-
+function updateName(n, p) {
+	players[p]['name'] = n;
+	console.log(n + ' '+p);
 }
 
 //Chooses the next player after each turn

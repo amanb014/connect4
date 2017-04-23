@@ -16,7 +16,7 @@ h1 {
 #board-container {
 	/*background-color: #fff;*/
 	width: 80%;
-	max-width: 720px;
+	max-width: 660px;
 	height: 66vh;
 	max-height: 700px;
 	margin: 0 auto 0 auto;
@@ -37,7 +37,7 @@ h1 {
 }
 
 .column {
-	width: 10%;
+	width: 12%;
 	height: 100%;
 	/*background-color: #e3e3e3;*/
 	margin: auto;
@@ -141,16 +141,23 @@ h1 {
 	justify-content: center;
 	width: 70%;
 	padding: 10px 0 0 0;
+
+	/*background-color: #fff;*/
 }
 
 .container {
 	margin: 0 2px;
 	width: 100px;
 	flex-grow: 1;
+
+	/*background-color: #000;*/
 }
 
 .pName {
-	font-size: 1.9vw;
+	font-size: 2.5vw;
+	width: 100%;
+	font-family: 'VT323', monospace;
+	text-align: center;
 }
 
 .score {
@@ -158,6 +165,10 @@ h1 {
 }
 .activePiece {
 	z-index: 1;
+}
+
+.notifications {
+	font-size: 1.5vw;
 }
 
 .player-0 {background-color: #D74E4F;}
@@ -176,6 +187,9 @@ h1 {
 		}
 		.btn {
 			font-size: 4.2vw;
+		}
+		.notifications {
+			font-size: 3.5vw;
 		}
 
 	}
